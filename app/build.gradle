@@ -51,26 +51,25 @@ android {
             //时间戳
             def timeNow
             //输出文件夹
-            def outDirectory
             //是否为Jenkins打包，输出路径不同
             if("true".equals(IS_JENKINS)){
                 //Jenkins打包输出到服务器路径
                 timeNow = getDate()
                 //BUILD_PATH为服务器输出路径
-                outDirectory = BUILD_PATH
+                variant.getPackageApplication().outputDirectory = file(BUILD_PATH)
                 //名字AutoBuild-v1.0.1-release.apk
                 newName = "AutoBuild-v" + APP_VERSION + "-" + variant.buildType.name + ".apk"
             }else {
                 //本地打包输出在本地路径
                 timeNow = getDate()
-                outDirectory = output.outputFile.getParent()
+                variant.getPackageApplication().outputDirectory = file(output.outputFile.getParent() + File.separator + timeNow)
                 if("debug".equals(variant.buildType.name)){
                     newName = "AutoBuildTest-v${APP_VERSION}-debug.apk"
                 }else {
                     newName = "AutoBuildTest-v" + APP_VERSION + "-" + variant.buildType.name + ".apk"
                 }
             }
-            outputFileName = new File(outDirectory + File.separator + timeNow , newName)
+            outputFileName = newName
         }
     }
 }
