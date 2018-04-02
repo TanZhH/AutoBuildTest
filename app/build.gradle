@@ -21,11 +21,7 @@ android {
         releaseConfig{
             //本地打包使用本地本机的KeyStore
             //Jenkins打包用的是服务器上的KeyStore
-            if("true".equals(IS_JENKINS)){
-                storeFile file(RELEASE_STORE_FILE)
-            }else {
-                storeFile file("E:/杂文件/jks/AutoBuildTest.jks")
-            }
+            storeFile file(RELEASE_STORE_FILE)
             keyAlias RELEASE_KEY_ALIAS
             keyPassword RELEASE_KEY_PASSWORD
             storePassword RELEASE_STORE_FILE_PASSWORD
