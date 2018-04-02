@@ -1,1 +1,1 @@
-include ":${BUILD_APP_NAME}"
+include ':app', ':app2'
